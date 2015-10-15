@@ -243,6 +243,7 @@
                             console.log('add collapsed');
                         }
 
+                       methods.saveLocal();
                     }
                 })
                 // Input text
@@ -252,6 +253,8 @@
                         nodeInput = $(this);
 
                     nodeText.text( nodeInput.val() );
+
+                    methods.saveLocal();
                 })
                 .on('keydown', '.' + params.nodeInputClass, function(event) {
                     var key = event.which || event.keyCode;
@@ -313,6 +316,8 @@
 
             methods.blur();
             methods.balance();
+
+            methods.saveLocal();
         },
 
         addNode: function() {
@@ -327,6 +332,8 @@
             methods.blur();
             methods.setEditable(newNode);
             methods.balance();
+
+            methods.saveLocal();
         },
 
         addChildNode: function() {
@@ -354,6 +361,8 @@
             methods.blur();
             methods.setEditable(newNode);
             methods.balance();
+
+            methods.saveLocal();
         },
 
         blur: function() {
@@ -531,8 +540,23 @@
             template += withWrap ? '</ol>' : '';
 
             return template;
+        },
+        //save to localStorage
+        saveLocal: function() {
+            var txt = $('.mindmap').html();
+            console.log('------update localStorage--------');
+            localStorage.setItem('mindmap', txt);   
         }
     };
+   
+    $(document).ready(function() {
+        var txt = localStorage.getItem('mindmap'); 
+        if(txt) {
+            $('.mindmap').empty().append(txt);
+        console.log('mindmap already defined');
+        }
+
+    });
 
     $.fn.mindmap = function( method ) {
 
