@@ -44,6 +44,7 @@
                 params.activeNode = null;
             }
 
+         
             // Keyboard events
             $(document).on('keydown', function(event) {
                 if (!params.activeNode) {
@@ -54,8 +55,6 @@
                     node = params.activeNode,
                     prevNode,
                     nextNode;
-
-                // console.log(key);
 
                 switch(key) {
 
@@ -214,10 +213,61 @@
             // Click by node
             self
 
-                
+                   
 
+
+
+
+
+                .on('mousedown', '.' + params.nodeClass, function(e) {
+                    var self = $(this);
+
+                   
+
+                    if(e.which === 3) {
+                        if (!self.hasClass(params.activeClass)) {
+                            methods.blur();
+                            methods.setActive(self);
+                            //if not active 
+                        }
+                        //I should bind event context menu +
+                        //create list of menu +
+                        //call function to delete this Node  
+
+                        // Trigger action when the contexmenu is about to be shown
+                        self.bind("contextmenu", function (event) {
+                            
+                            // Avoid the real one
+                            event.preventDefault();
+                            
+                            // Show contextmenu
+                            $(".custom-menu").show().
+                            
+                            // In the right position (the mouse)
+                            css({
+                                top: event.pageY + "px",
+                                left: event.pageX + "px"
+                            });
+                        });
+
+
+                        // If the document is clicked somewhere
+                        $(document).bind("mousedown", function (e) {
+                            
+                            // If the clicked element is not the menu
+                            if (!$(e.target).parents(".custom-menu").length > 0) {
+                                
+                                // Hide it
+                                $(".custom-menu").hide(100);
+                            }
+                        });
+
+
+                    }
+                })
 
                 .on('click', '.' + params.nodeClass, function() {
+
                     var self = $(this);
 
                     if (!self.hasClass(params.activeClass)) {
@@ -236,13 +286,14 @@
                             $(self).next('ol').removeClass('collapsed');
                             $(self).next('ol').css('display', 'inline-block');
                             console.log('remove collapsed');
+
                         }
                         else{
                             $(self).next('ol').addClass('collapsed');
                             $(self).next('ol').css('display', 'none');
                             console.log('add collapsed');
                         }
-
+                        methods.saveLocal();
                     }
                 })
                 // Input text
@@ -252,6 +303,7 @@
                         nodeInput = $(this);
 
                     nodeText.text( nodeInput.val() );
+
                 })
                 .on('keydown', '.' + params.nodeInputClass, function(event) {
                     var key = event.which || event.keyCode;
@@ -313,6 +365,8 @@
 
             methods.blur();
             methods.balance();
+
+            methods.saveLocal();
         },
 
         addNode: function() {
@@ -327,6 +381,8 @@
             methods.blur();
             methods.setEditable(newNode);
             methods.balance();
+
+            methods.saveLocal();
         },
 
         addChildNode: function() {
@@ -354,6 +410,8 @@
             methods.blur();
             methods.setEditable(newNode);
             methods.balance();
+
+            methods.saveLocal();
         },
 
         blur: function() {
@@ -375,6 +433,7 @@
                 .removeClass(params.editableClass);
 
             params.activeNode = null;
+            methods.saveLocal();
         },
 
         setActive: function(node) {
@@ -531,8 +590,79 @@
             template += withWrap ? '</ol>' : '';
 
             return template;
+        },
+        //save to localStorage
+        saveLocal: function() {
+
+        //remove activeClass before save
+           $('.' + params.activeClass).removeClass(params.activeClass);
+
+            var txt = $('.mindmap').html();
+            console.log('-update localStorage');
+            localStorage.setItem('mindmap', txt);   
         }
     };
+   
+
+
+   //when doc is ready
+    $(document).ready(function() {
+        var txt = localStorage.getItem('mindmap'); 
+        
+        if(txt) {
+            $('.mindmap').empty().append(txt);
+            console.log('mindmap already defined');
+        }
+        $('.mindmap').draggable();
+
+
+        // If the menu element is clicked
+        $(".custom-menu li").click(function(){
+            var node = params.activeNode,
+                prevNode,
+                nextNode;
+
+            
+            // This is the triggered action name
+            switch($(this).attr("data-action")) {
+                
+                // A case for each action. Your actions here
+                case "delete": 
+
+             //      debugger;
+
+                    if (node.hasClass(params.editableClass)) {
+                        return true;
+                    }
+                    else {
+                        if (node.hasClass(params.rootClass)) {
+                            return false;
+                        }
+                        nextNode = node.parent().next().children('.' + params.nodeClass);
+                        parentNode = node.parent().parent().prev();
+
+                        methods.removeNode();
+
+                        if (nextNode.length) {
+                            nextNode.addClass(params.activeClass);
+                            params.activeNode = nextNode;
+                        } else {
+                            parentNode.addClass(params.activeClass);
+                            params.activeNode = parentNode;
+                        }
+                    }
+
+                break;
+                case "second": console.log("second"); break;
+                case "third": console.log("third"); break;
+            }
+          
+            // Hide it AFTER the action was triggered
+            $(".custom-menu").hide(100);
+          });
+
+
+    });
 
     $.fn.mindmap = function( method ) {
 
@@ -546,10 +676,10 @@
 
     };
 
+    /*      
     $('.node').addClass(
         $(node).children('div').text().split(' ')[0]
                         );
-    /*
                             c = c.replace('!', 'err');
                             c = c.replace('@', 'ni');
                             c = c.replace('#', 'nb');
