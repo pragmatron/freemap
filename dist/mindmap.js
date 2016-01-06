@@ -1,8 +1,6 @@
 /*
-* mindmap
-* https://github.com/Chaptykov/mindmap
+* Freemap branched from https://github.com/Chaptykov/mindmap
 *
-* Copyright (c) 2013 Chaptykov
 * Licensed under the MIT license.
 */
 
