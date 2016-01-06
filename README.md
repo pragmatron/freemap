@@ -1,11 +1,5 @@
 # freemap
 
-Demo example here
+Simple JS based mindmapping library with google drive integration
 
-http://fetch.cymplex.a2hosted.com/
-
-tab to add new new child nodes
-
-return to add sibling nodes
-
-click to expand and collapse
+Based on fork of  https://github.com/Chaptykov/mindmap
