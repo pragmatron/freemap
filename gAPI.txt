@@ -1,0 +1,29 @@
+Your project ID will be freemap-1128 
+
+
+Was this useful?
+ 
+Project name	freemap
+Project ID	freemap-1128
+Project number	737859033100
+Created by	Володимир Паськів
+Creation date	11/13/15, 9:13 AM
+
+
+
+
+
+API key
+
+AIzaSyDy3NduCSea7KbTdabDxRkWklCxK_dmJtY
+
+
+
+
+OAuth 2.0 client IDs
+
+Here is your client ID
+737859033100-5n24c2hdl1sak12taavbmak1c1667lbm.apps.googleusercontent.com
+
+Here is your client secret
+sjYT28AawMdkKJftOBAOxk97
