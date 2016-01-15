@@ -2,8 +2,25 @@
 <meta charset="UTF-8">
 <title>Mindmap</title>
 <link rel="stylesheet" href="dist/mindmap.css">
+
+
 </head>
 <body>
+<div >
+	<input id="search" type="search" placeholder="search" >
+
+	<div id="gSignInWrapper">
+    	<span class="label">Sign in with:</span>
+  		<div id="customBtn" class="customGPlusSignIn">
+     		<span class="buttonText">+ Google</span>
+    	</div>
+  	</div>
+  	<div id="name">
+
+  	</div>
+	
+</div>
+
 	<ul class='custom-menu'>
 	  <li data-action="delete">delete node</li>
 	  <li data-action="second">Second thing</li>
@@ -173,6 +190,7 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="jquery.zoomooz.js"></script>
 <script src="dist/mindmap.js"></script> 
 <script>
 
@@ -181,5 +199,5 @@
 	});
 
 </script>
-
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 </body></html>

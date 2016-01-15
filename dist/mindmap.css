@@ -8,7 +8,7 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	
+overflow: hidden;
 	background-color: #2b2b2b;
 	//background-color: #7f9f7f;
 	//color: #dca3a3  ;
@@ -20,12 +20,22 @@ body {
 
 	-webkit-font-smoothing: antialiased;
 	}
-
 .collapsed {
 	display:block;
-
 }
-
+#search {
+	box-shadow: 0 0 3px 0 #3498DB;
+	margin-top: 1%;
+	margin-right: 1%;
+	background-color: #2b2b2b;
+	color: #7f9f7f  ;
+	outline: 0;
+	border: 0px solid;
+	font-family:  Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+	float: right;
+	-webkit-font-smoothing: antialiased;
+	-webkit-input-placeholder: {color:#2b2b0b;};
+}
 .task{
 	//any task with a @ in it 
 
@@ -35,7 +45,6 @@ body {
 	//any task with a # in it 
 
 }
-
 .imp{
 	//any task with ! in it 
 
@@ -64,14 +73,18 @@ body {
 
   .mf { color: #8cd0d3; } /* Literal.Number.Float - lighter blue */
   
+.recolaps {
+	display: inline-block;
+}
 
-
+::-webkit-scrollbar { 
+    display: none; 
+}
 
 .mindmap {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
-
 	width: 100%;
 	height: 100%;
 	text-align: center;
@@ -84,7 +97,14 @@ body {
 	height: 100%;
 	width: 0;
 	}
-
+.mindmap:hover {
+	cursor: -webkit-grab;
+	cursor: -moz-grab;
+}
+.mindmap:active {
+	cursor: -webkit-grabbing;
+	cursor: -moz-grabbing;	
+}
 .node {
 	position: relative;
 	display: inline-block;
@@ -102,9 +122,11 @@ body {
 	}
 .node:hover {
 	box-shadow: 0 0 3px 0 #3498DB;
+	/*cursor: move;*/
 	}
 .node:active {
 	box-shadow: 0 0 1px 0 #3498DB;
+
 	}
 	.node__input {
 		border: 0;
@@ -158,8 +180,7 @@ body {
 		display: block;
 		}
 
-
-.children {
+.children {	
 	position: relative;
 	list-style: none;
 	margin: 0;
@@ -291,3 +312,53 @@ body {
 .custom-menu li:hover {
     background-color: #DEF;
 }
+
+  #customBtn {
+      display: inline-block;
+      background: #DE2A48;
+      color: white;
+      margin-top: 10px;
+      width: 80px;
+      white-space: nowrap;
+      padding: 5px;
+      text-align: center;
+    }
+    #customBtn:hover {
+      cursor: pointer;
+    }
+    span.label {
+      font-size: 10pt;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 14px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+    }
+
+#name {
+	padding: 10px;
+}    
+
+#gUser {
+	border-radius: 18px;
+	width:36px;
+}
+#userName {
+	margin-left: 10px;
+	font-size: 10pt
+}
+
+a {
+	 display: inline-block;
+      vertical-align: middle;
+      font-size: 10px;
+      font-weight: bold;
+      color: #7f9f7f; 
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+
+}
+
